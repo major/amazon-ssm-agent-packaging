@@ -1,0 +1,32 @@
+From 6634a927483ad56e6aee823bcdf9b283f92f9e89 Mon Sep 17 00:00:00 2001
+From: Major Hayden <major@mhtx.net>
+Date: Mon, 29 Jan 2024 14:28:50 -0600
+Subject: [PATCH] Disable tests broken in mock
+
+---
+ agent/ssm/service_test.go | 9 ---------
+ 1 file changed, 9 deletions(-)
+
+diff --git a/agent/ssm/service_test.go b/agent/ssm/service_test.go
+index 6ad12ed8..f2d91133 100644
+--- a/agent/ssm/service_test.go
++++ b/agent/ssm/service_test.go
+@@ -82,15 +82,6 @@ func (suite *SsmServiceTestSuite) TestUpdateEmptyInstanceInformation() {
+ 	assert.NotNil(suite.T(), response, "response shouldn't be nil")
+ }
+ 
+-// Test function for update instance information
+-// This function update the agent name, agent statuc, and agent version.
+-func (suite *SsmServiceTestSuite) TestUpdateInstanceInformation() {
+-	// Give mock value to test UpdateInstanceInformation, assert the error is nil, assert the log.Debug function get called.
+-	response, err := suite.sdkService.UpdateInstanceInformation(suite.logMock, "2.2.3.2", "active", "Amazon-ssm-agent", "us-east-1b", "use1-az2", "ssmmessages")
+-	assert.Nil(suite.T(), err, "Err should be nil")
+-	assert.NotNil(suite.T(), response, "response shouldn't be nil")
+-}
+-
+ // Execute the test suite
+ func TestSsmServiceTestSuite(t *testing.T) {
+ 	suite.Run(t, new(SsmServiceTestSuite))
+-- 
+2.43.0
+
